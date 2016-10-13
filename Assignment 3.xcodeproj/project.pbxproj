@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B56CB3F1DB03BA700015F41 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B56CB3E1DB03BA700015F41 /* Player.cpp */; };
+		4B56CB411DB03CAE00015F41 /* Arena.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B56CB401DB03CAE00015F41 /* Arena.cpp */; };
+		4B56CB431DB03DE400015F41 /* utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B56CB421DB03DE400015F41 /* utilities.cpp */; };
+		4B56CB451DB03FED00015F41 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B56CB441DB03FED00015F41 /* Game.cpp */; };
 		4B5F27ED1DADA42E00A12A1A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B5F27EC1DADA42E00A12A1A /* main.cpp */; };
+		4B8E5E6A1DB038C80042FBB4 /* Robot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B8E5E691DB038C80042FBB4 /* Robot.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +28,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4B56CB3E1DB03BA700015F41 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		4B56CB401DB03CAE00015F41 /* Arena.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Arena.cpp; sourceTree = "<group>"; };
+		4B56CB421DB03DE400015F41 /* utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utilities.cpp; sourceTree = "<group>"; };
+		4B56CB441DB03FED00015F41 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		4B5F27E91DADA42E00A12A1A /* Assignment 3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Assignment 3"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5F27EC1DADA42E00A12A1A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		4B8E5E641DB034510042FBB4 /* Robot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Robot.h; sourceTree = "<group>"; };
+		4B8E5E651DB034AA0042FBB4 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		4B8E5E661DB035EC0042FBB4 /* Arena.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Arena.h; sourceTree = "<group>"; };
+		4B8E5E671DB036680042FBB4 /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		4B8E5E681DB036A10042FBB4 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
+		4B8E5E691DB038C80042FBB4 /* Robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Robot.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +73,16 @@
 			isa = PBXGroup;
 			children = (
 				4B5F27EC1DADA42E00A12A1A /* main.cpp */,
+				4B56CB421DB03DE400015F41 /* utilities.cpp */,
+				4B8E5E691DB038C80042FBB4 /* Robot.cpp */,
+				4B8E5E641DB034510042FBB4 /* Robot.h */,
+				4B8E5E651DB034AA0042FBB4 /* Player.h */,
+				4B8E5E661DB035EC0042FBB4 /* Arena.h */,
+				4B8E5E671DB036680042FBB4 /* Game.h */,
+				4B8E5E681DB036A10042FBB4 /* globals.h */,
+				4B56CB441DB03FED00015F41 /* Game.cpp */,
+				4B56CB3E1DB03BA700015F41 /* Player.cpp */,
+				4B56CB401DB03CAE00015F41 /* Arena.cpp */,
 			);
 			path = "Assignment 3";
 			sourceTree = "<group>";
@@ -119,7 +144,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B56CB431DB03DE400015F41 /* utilities.cpp in Sources */,
+				4B8E5E6A1DB038C80042FBB4 /* Robot.cpp in Sources */,
+				4B56CB411DB03CAE00015F41 /* Arena.cpp in Sources */,
+				4B56CB451DB03FED00015F41 /* Game.cpp in Sources */,
 				4B5F27ED1DADA42E00A12A1A /* main.cpp in Sources */,
+				4B56CB3F1DB03BA700015F41 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +276,7 @@
 				4B5F27F21DADA42E00A12A1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
