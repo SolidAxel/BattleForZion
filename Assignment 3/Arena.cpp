@@ -6,13 +6,12 @@
 //  Copyright © 2016 Axel Garcia. All rights reserved.
 //
 
-#include <stdio.h>
 #include "Arena.h"
 #include "Player.h"
 #include <iostream>
 #include <cstdlib>
 #include "globals.h"
-
+#include "Robot.h"
 
 Arena::Arena(int nRows, int nCols)
 {
@@ -30,14 +29,19 @@ Arena::Arena(int nRows, int nCols)
 
 Arena::~Arena()
 {
-    // TODO:  Delete the player and all remaining dynamically allocated robots.
+    for (int i = 0; i < m_nRobots; i++)
+    {
+        delete m_robots[i];
+    }
+
+    delete m_player;
+   
 }
 
 int Arena::rows() const
 {
     return m_rows;
 }
-
 int Arena::cols() const
 {
     return m_cols;
@@ -54,9 +58,16 @@ int Arena::robotCount() const
 }
 
 int Arena::nRobotsAt(int r, int c) const
-{
-    // TODO:  Return the number of robots at row r, column c.
-    return 0;  // This implementation compiles, but is incorrect.
+{   int counter = 0;
+    for (int i = 1; i< m_nRobots; i++) {
+        for (int j=1; j< m_nRobots; j++) {
+            if (m_robots[i] -> row() == r && m_robots[j] -> row() == r && m_robots[i] -> col() == c && m_robots[j] -> col() == c)
+            {
+                    counter++;
+            }
+        }
+    }
+    return counter;
 }
 
 void Arena::display(std::string msg) const
@@ -71,10 +82,34 @@ void Arena::display(std::string msg) const
         for (c = 0; c < cols(); c++)
             grid[r][c] = '.';
     
-    // Indicate each robot's position
-    // TODO:  If one robot is at some grid point, set the char to 'R'.
-    //        If it's 2 though 8, set it to '2' through '8'.
-    //        For 9 or more, set it to '9'.
+    for (int i = 0; i < m_nRobots; i++) {
+        if (m_robots[i] != nullptr) {
+            char& gridChar = grid[m_robots[i]->row()-1][m_robots[i]->col()-1];
+            if (gridChar == '.')
+                gridChar = 'R';
+            else if(gridChar == 'R'){
+                gridChar = '2';
+            }
+            else if (gridChar == '2'){
+                gridChar = '3';
+            }
+            else if (gridChar == '3'){
+                gridChar = '4';
+            }
+            else if (gridChar == '4'){
+                gridChar = '5';}
+            else if (gridChar== '5'){
+                gridChar = '6';}
+            else if (gridChar == '6'){
+                gridChar ='7';}
+            else if (gridChar == '7'){
+                gridChar ='8';}
+            else
+                gridChar = '9';
+
+    }
+}
+    
     
     // Indicate player's position
     if (m_player != nullptr)
@@ -116,14 +151,16 @@ void Arena::display(std::string msg) const
 
 bool Arena::addRobot(int r, int c)
 {
-    // If MAXROBOTS have already been added, return false.  Otherwise,
-    // dynamically allocate a new robot at coordinates (r,c).  Save the
-    // pointer to the newly allocated robot and return true.
+    if (m_nRobots == MAXROBOTS) {
+        return false;
+    }
+    else{
+        m_robots[m_nRobots] = new Robot(this, r, c);
+        m_nRobots++;
+        return true;
+    }
     
-    // TODO:  Implement this.
-    return false;  // This implementation compiles, but is incorrect.
 }
-
 bool Arena::addPlayer(int r, int c)
 {
     // Don't add a player if one already exists
@@ -139,15 +176,24 @@ void Arena::damageRobotAt(int r, int c)
 {
     // TODO:  Damage one robot at row r, column c if at least one is there.
     // If the robot does not survive the damage, destroy it.
+    for (int i = 0 ; i < m_nRobots; i++) {
+        if (m_robots[i] -> row() == r && m_robots[i] -> col() == c) {
+            m_robots[i] -> takeDamageAndLive();
+            if(m_robots[i] -> takeDamageAndLive() == false){
+                m_robots[i] = nullptr;
+            }
+        }
+    }
 }
 
 bool Arena::moveRobots()
 {
     for (int k = 0; k < m_nRobots; k++)
     {
-        // TODO:  Have the k-th robot in the arena make one move.
-        //        If that move results in that robot being in the same
-        //        position as the player, the player dies.
+        m_robots[k] -> move();
+        if (m_robots[k] -> row() == m_player -> row() && m_robots[k] -> col() == m_player -> col()) {
+            m_player -> setDead();
+        }
     }
     
     // return true if the player is still alive, false otherwise

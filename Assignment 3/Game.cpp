@@ -6,7 +6,6 @@
 //  Copyright © 2016 Axel Garcia. All rights reserved.
 //
 
-#include <stdio.h>
 #include "Game.h"
 #include <iostream>
 #include <string>

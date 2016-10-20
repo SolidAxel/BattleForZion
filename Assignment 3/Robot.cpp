@@ -8,7 +8,6 @@
 #ifndef Robot_cpp
 #define Robot_cpp
 
-#include <stdio.h>
 #include <cstdlib>
 #include <iostream>
 #include "Robot.h"
@@ -50,12 +49,27 @@ void Robot::move()
     {
         case UP:
             // TODO:  Move the robot up one row if possible.
+            if (row() != (m_arena -> rows()!=0)) {
+                m_row = m_row-1;
+            }
             break;
         case DOWN:
+            if (row() != m_arena -> rows()) {
+                m_row = m_row+1;
+            }
+            break;
         case LEFT:
+            if (col() != (m_arena -> cols()!=0)) {
+                m_col = m_col-1;
+            }
+            break;
         case RIGHT:
             // TODO:  Implement the other movements.
+            if (col() != m_arena -> cols()) {
+                m_col = m_col+1;
+            }
             break;
+
     }
 }
 
@@ -64,7 +78,8 @@ bool Robot::takeDamageAndLive()
     // TODO:  If the robot has been hit once before, return false (since a
     // second hit kills a robot).  Otherwise, return true (since the robot
     // survived the damage).
-    if(m_damage >= 1)
+    m_damage++;
+    if(m_damage > 1)
         return false;
     else
         return true;

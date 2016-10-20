@@ -6,11 +6,10 @@
 //  Copyright © 2016 Axel Garcia. All rights reserved.
 //
 
-#include <stdio.h>
 #include "Arena.h"
 #include "Player.h"
 #include <iostream>
-
+class Arena;
 Player::Player(Arena* ap, int r, int c)
 {
     if (ap == nullptr)
@@ -81,11 +80,24 @@ void Player::move(int dir)
     {
         case UP:
             // TODO:  Move the player up one row if possible.
+            if (row() != (m_arena -> rows()!=0)) {
+                m_row = m_row-1;
+            }
             break;
         case DOWN:
+            if (row() != m_arena -> rows()) {
+                m_row = m_row+1;
+            }
+            break;
         case LEFT:
+            if (col() != (m_arena -> cols()!=0)) {
+                m_col = m_col-1;
+            }
+            break;
         case RIGHT:
-            // TODO:  Implement the other movements.
+            if (col() != m_arena -> cols()) {
+                m_col = m_col+1;
+            }
             break;
     }
 }
@@ -93,13 +105,49 @@ void Player::move(int dir)
 bool Player::shoot(int dir)
 {
     m_age++;
+    bool flag =false;
     
     if (rand() % 3 == 0)  // miss with 1/3 probability
-        return false;
+        flag = false;
     
     // TODO:  Damage the nearest robot in direction dir, returning
     // true if a robot is hit and damaged, false if not hit.
-    return false;  // This implementation compiles, but is incorrect.
+     if (dir == 0) {
+        for (int i = 1; i <= MAXSHOTLEN; i++) {
+            if (m_arena -> nRobotsAt(row()-i, col()) != 0) {
+                m_arena -> damageRobotAt(row()-i, col());
+                flag= true;
+            }
+        }
+        
+    }
+    else if (dir == 1) {
+        for (int i = 1; i <= MAXSHOTLEN; i++) {
+            if (m_arena -> nRobotsAt(row()+i, col()) != 0) {
+                m_arena -> damageRobotAt(row()+i, col());
+                flag= true;
+            }
+        }
+        
+    }
+    else if (dir == 2) {
+        for (int i = 1; i <= MAXSHOTLEN; i++) {
+            if (m_arena -> nRobotsAt(row(),col()-i) != 0) {
+                m_arena -> damageRobotAt(row(), col()-i);
+                flag = true;
+            }
+        }
+        
+    }
+    else if (dir == 3) {
+        for (int i = 1; i <= MAXSHOTLEN; i++) {
+            if (m_arena -> nRobotsAt(row(), col()+i) != 0) {
+                m_arena -> damageRobotAt(row(), col()+i);
+                flag= true;
+            }
+        }
+    }
+    return flag;
 }
 
 bool Player::isDead() const

@@ -6,9 +6,10 @@
 //  Copyright © 2016 Axel Garcia. All rights reserved.
 //
 
-#include <stdio.h>
 #include "globals.h"
 #include <iostream>
+
+
 ///////////////////////////////////////////////////////////////////////////
 //  clearScreen implementations
 ///////////////////////////////////////////////////////////////////////////
@@ -49,7 +50,7 @@ void clearScreen()  // will just write a newline in an Xcode output window
     else
     {
         static const char* ESC_SEQ = "\x1B[";  // ANSI Terminal esc seq:  ESC [
-        std::cout << ESC_SEQ << "2J" << ESC_SEQ << "H" << &fflush;
+        std::cout << ESC_SEQ << "2J" << ESC_SEQ << "H" << std::flush;
     }
 }
 
