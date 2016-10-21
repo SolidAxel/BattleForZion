@@ -35,7 +35,6 @@ Arena::~Arena()
     }
 
     delete m_player;
-   
 }
 
 int Arena::rows() const
@@ -59,13 +58,11 @@ int Arena::robotCount() const
 
 int Arena::nRobotsAt(int r, int c) const
 {   int counter = 0;
-    for (int i = 1; i< m_nRobots; i++) {
-        for (int j=1; j< m_nRobots; j++) {
-            if (m_robots[i] -> row() == r && m_robots[j] -> row() == r && m_robots[i] -> col() == c && m_robots[j] -> col() == c)
+    for (int i = 0 ; i< m_nRobots; i++) {
+        if (m_robots[i] -> row() == r && m_robots[i] -> col() == c)
             {
                     counter++;
             }
-        }
     }
     return counter;
 }
@@ -174,13 +171,19 @@ bool Arena::addPlayer(int r, int c)
 
 void Arena::damageRobotAt(int r, int c)
 {
+    
     // TODO:  Damage one robot at row r, column c if at least one is there.
     // If the robot does not survive the damage, destroy it.
     for (int i = 0 ; i < m_nRobots; i++) {
         if (m_robots[i] -> row() == r && m_robots[i] -> col() == c) {
-            m_robots[i] -> takeDamageAndLive();
-            if(m_robots[i] -> takeDamageAndLive() == false){
-                m_robots[i] = nullptr;
+            if((m_robots[i] -> takeDamageAndLive())==false){
+                int temp = i;
+                delete m_robots[i];
+                m_nRobots--;
+                for (int k = temp; k <= m_nRobots; k++) {
+                    m_robots[k] = m_robots[k+1];
+                }
+                break;
             }
         }
     }

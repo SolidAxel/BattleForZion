@@ -41,7 +41,6 @@ int Robot::col() const
 {
     return m_col;
 }
-
 void Robot::move()
 {
     // Attempt to move in a random direction; if we can't move, don't move
@@ -79,9 +78,10 @@ bool Robot::takeDamageAndLive()
     // second hit kills a robot).  Otherwise, return true (since the robot
     // survived the damage).
     m_damage++;
+    bool flag = true;
     if(m_damage > 1)
-        return false;
-    else
-        return true;
+        flag = false;
+    return flag;
+    
 }
 #endif

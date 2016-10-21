@@ -114,36 +114,40 @@ bool Player::shoot(int dir)
     // true if a robot is hit and damaged, false if not hit.
      if (dir == 0) {
         for (int i = 1; i <= MAXSHOTLEN; i++) {
-            if (m_arena -> nRobotsAt(row()-i, col()) != 0) {
+            if (m_arena -> nRobotsAt(row()-i, col()) >= 1) {
                 m_arena -> damageRobotAt(row()-i, col());
                 flag= true;
+                break;
             }
         }
         
     }
     else if (dir == 1) {
         for (int i = 1; i <= MAXSHOTLEN; i++) {
-            if (m_arena -> nRobotsAt(row()+i, col()) != 0) {
+            if (m_arena -> nRobotsAt(row()+i, col()) >= 1) {
                 m_arena -> damageRobotAt(row()+i, col());
                 flag= true;
+                break;
             }
         }
         
     }
     else if (dir == 2) {
         for (int i = 1; i <= MAXSHOTLEN; i++) {
-            if (m_arena -> nRobotsAt(row(),col()-i) != 0) {
+            if (m_arena -> nRobotsAt(row(),col()-i) >= 1) {
                 m_arena -> damageRobotAt(row(), col()-i);
                 flag = true;
+                break;
             }
         }
         
     }
     else if (dir == 3) {
         for (int i = 1; i <= MAXSHOTLEN; i++) {
-            if (m_arena -> nRobotsAt(row(), col()+i) != 0) {
+            if (m_arena -> nRobotsAt(row(), col()+i) >= 1) {
                 m_arena -> damageRobotAt(row(), col()+i);
                 flag= true;
+                break;
             }
         }
     }

@@ -29,7 +29,7 @@ private:
     Arena* m_arena;
     int    m_row;
     int    m_col;
-    int    m_damage;
+    int    m_damage = 0;
     
 };
 
