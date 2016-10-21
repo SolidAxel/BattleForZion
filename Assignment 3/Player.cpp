@@ -48,26 +48,106 @@ int Player::age() const
 
 std::string Player::takeComputerChosenTurn()
 {
-    // TODO:  Replace this implementation:
-    stand();
-    return "Stood";
-    // Your replacement implementation should do something intelligent
-    // and return a string that describes what happened.  When you've
-    // decided what action to take, take it by calling move, shoot, or stand.
-    // This function must return one of the following four strings:
-    //     "Moved."
-    //     "Shot and hit!"
-    //     "Shot and missed!"
-    //     "Stood."
-    
-    // Here's one possible strategy:
-    //   If moving in some direction would put me in less immediate danger
-    //     than standing, then move in that direction.
-    //   else shoot in the direction of the nearest robot I can hit.
-    
-    // A more aggressive strategy is possible, where you hunt down robots.
+    std::string message;
+    if (m_arena -> nRobotsAt(row()-1, col()) >= 1 ||m_arena -> nRobotsAt(row()+1, col()) >=1||m_arena -> nRobotsAt(row(), col()-1) >=1||m_arena -> nRobotsAt(row(), col()+1) >=1) {
+        if (m_arena -> nRobotsAt(row()-1, col()) >= 1) {
+            if (row() != m_arena -> rows()) {
+                move(DOWN);
+                message = "Moved.";
+            }
+            else{
+                if(shoot(UP) == true){
+                    message = "Shot and hit!";
+                }
+                else
+                    message ="Shot and missed!";
+            }
+        }
+        else if (m_arena -> nRobotsAt(row()+1, col()) >=1){
+            if (row() != (m_arena -> rows()!=0)) {
+                move(UP);
+                message = "Moved.";
+            }
+            else{
+                if(shoot(DOWN) == true){
+                    message = "Shot and hit!";
+                }
+                else
+                    message ="Shot and missed!";
+            }
+        }
+        else if (m_arena -> nRobotsAt(row(), col()-1) >=1){
+            if (col() != m_arena -> cols()) {
+                move(RIGHT);
+                message = "Moved.";
+            }
+            else{
+                if(shoot(LEFT) == true){
+                    message = "Shot and hit!";
+                }
+                else
+                    message ="Shot and missed!";
+            }
+        }
+        else if (m_arena -> nRobotsAt(row(), col()+1) >=1){
+            if (col() != (m_arena -> cols()!=0)) {
+                move(LEFT);
+                message = "Moved.";
+            }
+            else{
+                if(shoot(RIGHT) == true){
+                    message = "Shot and hit!";
+                }
+                else
+                    message ="Shot and missed!";
+            }
+        }
+    }
+    else{
+        for (int i = 2; i <= MAXSHOTLEN; i++) {      //i initialized to two so computer only takes shot if robots is at least two spaces away.
+            if (m_arena -> nRobotsAt(row()+i, col()) >= 1||m_arena -> nRobotsAt(row()-i, col()) >= 1||m_arena -> nRobotsAt(row(), col()+i) >= 1||m_arena -> nRobotsAt(row(), col()-i) >= 1) {
+                if (m_arena -> nRobotsAt(row()+i, col()) >= 1) {
+                    if(shoot(DOWN) == true){
+                        message = "Shot and hit!";
+                        
+                        }
+                        else
+                            message = "Shot and missed!";
+                        break;
+                    }
+                    else if (m_arena -> nRobotsAt(row()-i, col()) >= 1) {
+                        if(shoot(UP) == true){
+                            message = "Shot and hit!";
+                        }
+                        else
+                            message = "Shot and missed!";
+                        break;
+                    }
+                    else if (m_arena -> nRobotsAt(row(), col()+i) >= 1) {
+                        if(shoot(RIGHT) == true){
+                            message = "Shot and hit!";
+                        }
+                        else
+                            message = "Shot and missed!";
+                        break;
+                    }
+                    else if (m_arena -> nRobotsAt(row(), col()-i) >= 1) {
+                        if(shoot(LEFT) == true){
+                            message = "Shot and hit!";
+                        }
+                        else
+                            message = "Shot and missed!";
+                        break;
+                    }
+            }
+            else{
+                move(rand() % 4);
+                message = "Moved.";
+            }
+        }
+    }
+        return message;
 }
-
 void Player::stand()
 {
     m_age++;
